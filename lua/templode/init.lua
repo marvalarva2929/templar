@@ -8,7 +8,7 @@ local f = ls.function_node
 local c = ls.choice_node
 local d = ls.dynamic_node
 
-TEMPLATE_DIR = '/home/joshua/.config/templar/templates/'
+TEMPLATE_DIR = '/home/joshua/.config/templode/templates/'
 
 local function setup()
 	local files = {}
@@ -25,12 +25,13 @@ local function setup()
 		local name = file_s[1]
 
 		local f_lines = {}
-		for _, line in ipairs(lines) do f_lines[#f_lines+1]= t("", line) end
+		for _, line in ipairs(lines) do 
+			f_lines[#f_lines+1]= t(line)
+			f_lines[#f_lines+1] = t("", "")
+		end
 
 		ls.add_snippets(filetype, {
-			s(name, {
-				f_lines	
-			})
+			s(name, {t(lines)})
 		})
 	end
 
