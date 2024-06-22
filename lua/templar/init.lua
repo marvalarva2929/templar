@@ -18,6 +18,13 @@ local function setup()
 		print(file)
 		local lines = {}
 		for line in io.lines(TEMPLATE_DIR..file) do lines[#lines+1]=line end
+		
+		local file_s = {}
+		for w in tostring(file):gmatch("([^.]*)") do file_s[#file_s+1]=w end;
+		local filetype = file_s[2]
+		local name = file[1]
+
+		
 	end
 
 
