@@ -15,16 +15,23 @@ local function setup()
 	local cmd = "ls -pa "..TEMPLATE_DIR.." | grep -v /"
 	for dir in io.popen(cmd):lines() do files[#files+1]=dir end
 	for _, file in ipairs(files) do
-		print(file)
+		--print(file)
 		local lines = {}
 		for line in io.lines(TEMPLATE_DIR..file) do lines[#lines+1]=line end
-		
-		local file_s = {}
-		for w in tostring(file):gmatch("([^.]*)") do file_s[#file_s+1]=w end;
-		local filetype = file_s[2]
-		local name = file[1]
 
-		
+		local file_s = {}
+		for w in tostring(file):gmatch("([^.]*)") do table.insert(file_s, w) end;
+		local filetype = file_s[3]
+		local name = file_s[1]
+
+		local f_lines = {}
+		for _, line in ipairs(lines) do f_lines[#f_lines+1]= t("", line) end
+
+		ls.add_snippets(filetype, {
+			s(name, {
+				f_lines	
+			})
+		})
 	end
 
 
