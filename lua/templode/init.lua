@@ -8,7 +8,7 @@ local f = ls.function_node
 local c = ls.choice_node
 local d = ls.dynamic_node
 
-TEMPLATE_DIR = '/home/joshua/.config/templode/templates/'
+TEMPLATE_DIR = os.getenv( "HOME" )..'.config/templode/templates/'
 
 local function setup()
 	local files = {}
